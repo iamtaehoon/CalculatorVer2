@@ -27,7 +27,7 @@ public class Calculator {
     }
 
     private void resetCalculatorAns() { // resetCalculator 가 더 나은 함수명일 수 있음. 마지막에 고민해주자.
-        ans = 0; // 이걸 ans = 0 으로 놔두는 것보다 꺼진 경우 상태로 만들어서 빼주는 게 나을지 / 아니면 어차피 한줄이니까 그냥 안만드는게 나을지..?
+        ans = 0;
     }
 
     public boolean getPowerStatus() {
@@ -35,18 +35,17 @@ public class Calculator {
     }
 
     public int operate(String operationYouEntered) {
-        //문자열이 제대로 된건지 확인한다.
-        checkThisOperationIsCorrect(operationYouEntered);
+        String operationAfterPreProcessing = preProcessingAboutOperation(operationYouEntered);
+        System.out.println("operationAfterPreProcessing = " + operationAfterPreProcessing);
         return ans;
     }
 
-    private int checkThisOperationIsCorrect(String operation) {
+    private String preProcessingAboutOperation(String operation) {
         this.operation = operation;
         checkInvalidChar(operation);
         //문자열이 만약 *,/,+,- 로 시작하면 ans를 앞에 붙여줘야한다.
         operation = addInitialValueIfSymbolStart();
-        System.out.println("operation = " + operation);
-        return 1;
+        return operation + "=";
     }
 
     private String addInitialValueIfSymbolStart() {

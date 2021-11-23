@@ -6,6 +6,8 @@ public class Main {
 
         User user = new User();
         user.returnResultUsingCalculator(calculator1, "*213-132");
+        user.returnResultUsingCalculator(calculator1, "213");
+        user.returnResultUsingCalculator(calculator1, "1/213");
 
     }
 }
