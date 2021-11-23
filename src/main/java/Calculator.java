@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -34,18 +35,71 @@ public class Calculator {
         return turnOn;
     }
 
-    public int operate(String operationYouEntered) {
-        String operationAfterPreProcessing = preProcessingAboutOperation(operationYouEntered);
+    public int operateEntered(String operationYouEntered) {
+        String operationAfterPreProcessing = preprocessingAboutOperation(operationYouEntered);
         System.out.println("operationAfterPreProcessing = " + operationAfterPreProcessing);
+        //TODO 각 기호랑 인자를 나눠준다.
+        //TODO 나눈 값을 큐에 넣어준다.
+        //TODO 곱/나눗셈을 먼저 진행해주고, 이후에 덧/뺄셈을 진행한다. 만약 두개의 인자 중 계산이 완료되지 않은 값이 있으면 계산을 완료시킨다.
+        //TODO 잘못된 값으로 계산을 할 수 없으면 IllegalArgument를 띄워준다.
+        operateAfterPreprocessing(operationAfterPreProcessing); //TODO 이름을 어떻게 지어줘야 할지 고민이 많이 됨.
         return ans;
     }
 
-    private String preProcessingAboutOperation(String operation) {
+    private int operateAfterPreprocessing(String operationAfterPreProcessing) {
+        operationAfterPreProcessing += "=";
+        ArrayList<String> factorList = new ArrayList<>();
+        ArrayList<Character> symbolList = new ArrayList<>();
+        int operationLength = operationAfterPreProcessing.getBytes().length;
+
+        int first = 0;
+        int last;
+        int bracketLevel = 0;
+
+        for (int i = 0; i < operationLength; i++) {
+            char c = operationAfterPreProcessing.charAt(i);
+            last = i;
+            if (c == '(') {
+                if (bracketLevel == 0) {
+                    first = i;
+                }
+                bracketLevel += 1;
+                continue;
+            }
+            if (c == ')') {
+                bracketLevel -= 1;
+            }
+
+            if ((bracketLevel == 0) & (c == '+' || c == '-' || c == '*' || c == '/' || c == '=')) {
+                last = i;
+//                if (first == last) {
+//                    System.out.println("오류 -> 기호 사이에 숫자가 있지 않음");
+//                }
+                String factor = operationAfterPreProcessing.substring(first, last);
+
+                factorList.add(factor);
+                symbolList.add(c);
+                first = i + 1;
+            }
+        }
+
+        for (String s : factorList) {
+            System.out.println("s = " + s);
+        }
+        for (Character character : symbolList) {
+            System.out.println("character = " + character);
+        }
+
+        return 0;
+    }
+
+
+    private String preprocessingAboutOperation(String operation) {
         this.operation = operation;
         checkInvalidChar(operation);
         //문자열이 만약 *,/,+,- 로 시작하면 ans를 앞에 붙여줘야한다.
         operation = addInitialValueIfSymbolStart();
-        return operation + "=";
+        return operation; // =이 여기서 들어가면 안될 거 같음.
     }
 
     private String addInitialValueIfSymbolStart() {
