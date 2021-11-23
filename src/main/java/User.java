@@ -5,8 +5,7 @@ public class User {
 
     public int returnResultUsingCalculator(Calculator calculator, String operationYouEntered) {
         if (calculatorIsOn(calculator)) {
-//            return calculator.operate(operationYouEntered);
-            return 1;
+            return calculator.operate(operationYouEntered);
         }
         throw new IllegalStateException("계산기의 전원이 켜지지 않았습니다");
     }
