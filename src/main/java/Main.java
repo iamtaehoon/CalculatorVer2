@@ -4,9 +4,10 @@ public class Main {
 
         Calculator calculator1 = new Calculator(1);
         calculator1.pressPowerBtn();
-        calculator1.pressPowerBtn();
+//        calculator1.pressPowerBtn();
 
         User user = new User();
+        user.returnResultUsingCalculator(calculator1, "213");
 //        구현 기능 목록
 //
 //        계산기를 켠다.
