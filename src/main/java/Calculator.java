@@ -49,7 +49,7 @@ public class Calculator {
         String patterns = "^[0-9|\\+|-|\\*|/|\\(|\\)]*$";
         boolean containInvalidChar = !Pattern.matches(patterns, operation);
         if (containInvalidChar) {
-            throw new IllegalArgumentException("0~9, +,-,*,/ 이외의 문자가 입력되었습니다.");
+            throw new IllegalArgumentException("0~9, +,-,*,/,(,) 이외의 문자가 입력되었습니다.");
         }
     }
 }
