@@ -4,6 +4,7 @@ public class Calculator {
     private int thisCalculatorsIndex;
     private Boolean turnOn = false;
     private int ans = 0;
+    String operation;
 
     public Calculator(int thisCalculatorsIndex) {
         this.thisCalculatorsIndex = thisCalculatorsIndex;
@@ -40,13 +41,28 @@ public class Calculator {
     }
 
     private int checkThisOperationIsCorrect(String operation) {
+        this.operation = operation;
         checkInvalidChar(operation);
-
+        //문자열이 만약 *,/,+,- 로 시작하면 ans를 앞에 붙여줘야한다.
+        operation = addInitialValueIfSymbolStart();
+        System.out.println("operation = " + operation);
         return 1;
     }
 
+    private String addInitialValueIfSymbolStart() {
+        if (firstIs("*") || firstIs("/") || firstIs("+") || firstIs("-")) {
+            return Integer.toString(ans) + operation;
+        }
+        return operation;
+
+    }
+
+    private boolean firstIs(String symbol) {
+        return operation.substring(0, 1).equals(symbol);
+    }
+
     private void checkInvalidChar(String operation) {
-        String patterns = "^[0-9|\\+|-|\\*|/|\\(|\\)]*$";
+        String patterns = "^[0-9|\\+|\\-|\\*|\\/|\\(|\\)]*$";
         boolean containInvalidChar = !Pattern.matches(patterns, operation);
         if (containInvalidChar) {
             throw new IllegalArgumentException("0~9, +,-,*,/,(,) 이외의 문자가 입력되었습니다.");
