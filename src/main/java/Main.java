@@ -6,7 +6,7 @@ public class Main {
         calculator1.pressPowerBtn();
 
         User user = new User();
-        user.returnResultUsingCalculator(calculator1, "*k0213");
+        user.returnResultUsingCalculator(calculator1, "((#*213");
 
 
 //        구현 기능 목록
