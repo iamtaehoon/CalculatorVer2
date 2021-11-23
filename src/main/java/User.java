@@ -8,6 +8,7 @@ public class User {
             return calculator.operate(operationYouEntered);
         }
         throw new IllegalStateException("계산기의 전원이 켜지지 않았습니다");
+
     }
 
     private boolean calculatorIsOn(Calculator calculator) {

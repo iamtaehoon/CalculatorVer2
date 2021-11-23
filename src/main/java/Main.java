@@ -4,11 +4,9 @@ public class Main {
 
         Calculator calculator1 = new Calculator(1);
         calculator1.pressPowerBtn();
-//        calculator1.pressPowerBtn();
-//        calculator1.pressPowerBtn();
 
         User user = new User();
-        System.out.println(user.returnResultUsingCalculator(calculator1, "213"));
+        user.returnResultUsingCalculator(calculator1, "*k0213");
 
 
 //        구현 기능 목록

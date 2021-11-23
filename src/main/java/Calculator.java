@@ -1,7 +1,9 @@
+import java.util.regex.Pattern;
+
 public class Calculator {
     private int thisCalculatorsIndex;
     private Boolean turnOn = false;
-    private int ans = 10;
+    private int ans = 0;
 
     public Calculator(int thisCalculatorsIndex) {
         this.thisCalculatorsIndex = thisCalculatorsIndex;
@@ -32,6 +34,22 @@ public class Calculator {
     }
 
     public int operate(String operationYouEntered) {
+        //문자열이 제대로 된건지 확인한다.
+        checkThisOperationIsCorrect(operationYouEntered);
         return ans;
+    }
+
+    private int checkThisOperationIsCorrect(String operation) {
+        // ^[0-9]*$
+        checkInvalidChar(operation);
+        return 1;
+    }
+
+    private void checkInvalidChar(String operation) {
+        String patterns = "^[0-9|\\\\+|-|\\\\*|/]*$";
+        boolean containInvalidChar = !Pattern.matches(patterns, operation);
+        if (containInvalidChar) {
+            throw new IllegalArgumentException("0~9, +,-,*,/ 이외의 문자가 입력되었습니다.");
+        }
     }
 }
